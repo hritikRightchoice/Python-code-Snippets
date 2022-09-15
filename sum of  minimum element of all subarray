@@ -1,0 +1,28 @@
+stack = []
+left = []
+right = []
+n = len(arr)
+for i in range(n):
+    count = 0
+    while stack and arr[stack[-1][1]] >=arr[i]:
+        count += stack[-1][0] 
+        stack.pop()
+    stack.append([count+1,i]
+    )
+    left.append(count+1)
+stack = []
+right = [0]*n
+for i in range(n-1,-1,-1):
+    count = 0
+
+    while stack and arr[stack[-1][1]] >arr[i]:
+        count += stack[-1][0] 
+        stack.pop()
+    # print(stack)
+    stack.append([count+1,i])
+    right[i] = count+1
+ans = 0
+for i in range(n):
+    ans+=(left[i]*right[i])*arr[i]
+return ans%(pow(10,9)+7)
+        
