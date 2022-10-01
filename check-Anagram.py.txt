@@ -1,0 +1,5 @@
+from collections import Counter 
+def isAnagram(a,b):
+        count1 = Counter(a)
+        count2 = Counter(b)
+        return count1 == count2

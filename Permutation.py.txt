@@ -1,0 +1,13 @@
+import itertools as it
+def find_permutation(S):
+        # Code here
+        li = it.permutations(S)
+        li =list(li)
+        ans = []
+        for i in range(len(li)):
+            ans.append("")
+            for char in li[i]:
+                ans[-1]+=char
+        ans = list(set(ans)) #this is done bcs for when character is repeated itertools.per.. give multiple same permutation
+        ans.sort()
+        return ans

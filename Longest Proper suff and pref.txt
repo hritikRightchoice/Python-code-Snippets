@@ -1,0 +1,16 @@
+def lps(s):
+	n = len(s)
+	lenn = 0
+	ps = [0]*n
+	for i in range(1,n):
+		if s[i] == s[lenn]:
+		        lenn+=1
+		        ps[i] = lenn
+            	else:
+                	lenn = ps[i-1]
+                	while s[lenn] != s[i] and lenn>0:
+                    		lenn = ps[lenn-1]
+                	if lenn>0 or s[lenn] == s[i]:
+                    		lenn+=1
+                	ps[i] = lenn
+        return ps[-1]
