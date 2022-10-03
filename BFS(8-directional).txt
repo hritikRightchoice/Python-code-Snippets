@@ -1,0 +1,20 @@
+n = len(grid)
+m = len(grid[0])
+def bfs(i,j):
+    queue = []
+    queue.append([i,j])
+    x = [0,1,1,1,0,-1,-1,-1]
+    y = [1,1,0,-1,-1,-1,0,1]
+    while queue:
+        i,j = queue[0]
+        queue = queue[1:]
+        for e in range(8):
+            newx = i + x[e]
+            newy = j + y[e]
+            # print(newx,newy,i,j)
+            if newx<0 or newy<0 or newx >=n or newy>=m:
+                continue
+            
+            if grid[newx][newy] == 1:
+                grid[newx][newy] = '#'
+                queue.append([newx,newy])
