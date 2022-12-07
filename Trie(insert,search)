@@ -1,0 +1,48 @@
+class Trie:
+
+    def __init__(self):
+        self.data = ""
+        self.we = 0
+        self.child = {}
+
+    def insert(self, word: str) -> None:
+        node = self
+        for char in word:
+            if char in node.child:
+                node = node.child[char]
+            else:
+                newnode = Trie()
+                newnode.data = char
+                node.child[char] = newnode
+                node = newnode
+        node.we+=1
+
+
+
+    def search(self, word: str) -> bool:
+        node = self
+        for char in word:
+            if char in node.child:
+                node = node.child[char]
+            else:
+                return False
+        if node.we>0:
+            return True
+        else:
+            return False
+
+    def startsWith(self, prefix: str) -> bool:
+        node = self
+        for char in prefix:
+            if char in node.child:
+                node = node.child[char]
+            else:
+                return False
+        return True
+
+
+# Your Trie object will be instantiated and called as such:
+# obj = Trie()
+# obj.insert(word)
+# param_2 = obj.search(word)
+# param_3 = obj.startsWith(prefix)
