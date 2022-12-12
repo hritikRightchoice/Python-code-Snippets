@@ -1,0 +1,54 @@
+class segment:
+
+    def __init__(self, nums: List[int]):
+        self.n = len(nums)
+        self.tree = [0]*(4*self.n + 1)
+        def traverse(index,s,e):
+            if s == e:
+                self.tree[index] =nums[s]
+            else:
+                mid = (s+e)//2
+                traverse(2*index,s,mid)
+                traverse(2*index + 1, mid+1,e)
+                self.tree[index] = self.tree[2*index] + self.tree[2*index + 1]
+                return
+        traverse(1,0,self.n-1)
+
+
+
+    def update(self, k: int, val: int) -> None:
+        #no overlap
+        def traverse(index,s,e):
+            if k<s or k>e:
+                return 
+            if s == e:
+                self.tree[index] = val
+                return
+
+            elif k>=s and k<=e:
+                mid = (s+e)//2
+                traverse(2*index, s,mid)
+                traverse(2*index+ 1,  mid+1,e)
+                self.tree[index] = self.tree[2*index] + self.tree[2*index + 1]
+        traverse(1,0,self.n-1)
+        # print(self.tree)
+
+
+            
+
+    def sumRange(self, left: int, right: int) -> int:
+        def traverse(index, s, e):
+            
+            if s>right or e < left:
+                return 0
+            if s == e:
+                return self.tree[index]
+            elif s>= left and e<=right:
+                return self.tree[index]
+            else:
+                mid = (s+e)//2
+                return traverse(2*index,s, mid) + traverse(2*index + 1, mid+1, e)
+                
+        return traverse(1,0,self.n-1)
+
+
