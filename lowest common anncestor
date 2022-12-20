@@ -1,0 +1,18 @@
+def lca(root):       
+      if not root:
+          return False
+      else:
+          if root == p or root == q:
+              return root
+          a= lca (root.left)
+          b= lca (root.right)
+
+          if (a==False) and (b == False) :
+              return False
+          elif (a==False) and (abs(b.val)<= pow(10,9)):
+              return b
+          elif abs(a.val) <= pow(10,9) and (b == False):
+                return a  
+          elif a!=b:
+              return root
+  return lca(root)
